@@ -66,16 +66,21 @@
         </Card>
     </div>
 </template>
-<script>
-import Card from "@widget/components/Card";
-import { basiTableData } from "../../../constant/basic-tablle-data";
+<script lang="ts">
+import Card from "@widget/components/Card/index.vue";
+// import { basiTableData } from "../../../constant/basic-tablle-data";
 export default {
     components: {
         Card,
     },
+    props:{
+        basiTableData:{
+            default: [] as any[]
+        }
+    },
     data() {
         return {
-            basiTableData,
+            // basiTableData,
             columns: [
                 {
                     label: "Age",

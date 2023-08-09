@@ -10,13 +10,22 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/app",
-    name: "Layout",
+    name: "home",
     redirect: "/app/home",
-    component: () => import("../views/HomeView.vue"),
+    // component: () => import("../views/HomeView.vue"),
     meta: {
       middleware: [auth],
     },
-    children: []
+    children: [
+      {
+        path: "home",
+        name: "home",
+        component: () => import("../views/HomeView.vue"),
+        meta: {
+          hide: true,
+        },
+      },
+    ]
   },
   {
     path: "/login",
