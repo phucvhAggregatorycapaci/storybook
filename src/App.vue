@@ -1,11 +1,33 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <div>
+    <SideBar :items="appConfig.sideBarItem"/>
   <router-view />
+  </div>
 </template>
 
+<script>
+
+// import LoginView from '@widget/views/auth/login/login3.vue'
+import AppConfig from './appConfig'
+import SideBar from '@widget/components/Sidebar/index.vue'
+export default {
+  components:{
+    SideBar
+  },
+  data(){
+    return{
+
+      appConfig:AppConfig
+  }
+  },
+  computed:{
+    includeSidebar(){
+      console.log(this)
+      return true
+    }
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

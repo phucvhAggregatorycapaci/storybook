@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "target": "esnext",
     "module": "esnext",
     "strict": true,
+    "outDir"    : ".",
     "jsx": "preserve",
     "moduleResolution": "node",
     "experimentalDecorators": true,
@@ -12,14 +14,13 @@
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": true,
     "sourceMap": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "types": [
       "webpack-env"
     ],
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"],
+      "@widget/*": ["src/stories/widget/*"]
     },
     "lib": [
       "esnext",
@@ -37,5 +38,15 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "quotemark": [
+      [
+        true,
+        "double"
+      ],
+      [
+        true,
+        "single"
+      ]
+    ],
 }

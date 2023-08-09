@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import auth from "@/middleware/auth";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -8,13 +9,23 @@ const routes: Array<RouteRecordRaw> = [
     component: HomeView,
   },
   {
-    path: "/about",
-    name: "about",
+    path: "/app",
+    name: "Layout",
+    redirect: "/app/home",
+    component: () => import("../views/HomeView.vue"),
+    meta: {
+      middleware: [auth],
+    },
+    children: []
+  },
+  {
+    path: "/login",
+    name: "login",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+      import(/* webpackChunkName: "about" */ "../views/auth/Login.vue"),
   },
 ];
 
@@ -22,5 +33,9 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+router.beforeEach(async (to, from) => {
+  const canAccess = await auth(to)
+  if (!canAccess) return '/login'
+})
 
 export default router;

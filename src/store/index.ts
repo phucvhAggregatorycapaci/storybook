@@ -1,9 +1,15 @@
 import { createStore } from "vuex";
+import {themeSettings} from './themeSettings'
+export type RootState ={
+  // Define your root state properties here
+}
 
-export default createStore({
-  state: {},
-  getters: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+const store = createStore({
+  modules:{
+    themeSettings:themeSettings
+  }
 });
+
+
+
+export default store

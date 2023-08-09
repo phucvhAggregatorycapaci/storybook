@@ -1,0 +1,17 @@
+// src/index.scss
+
+// Importing Tailwind CSS styles
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+// Your custom styles go here
+// For example:
+body {  
+    background-color: red;
+}
+// You can also use Tailwind CSS utility classes here
+// For example:
+.button {
+    @apply px-4 py-2 bg-blue-500 text-white rounded;
+}
