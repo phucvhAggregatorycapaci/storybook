@@ -1,24 +1,32 @@
-<template>
-  <div>
-    <TableBase :rawData="rawData" :columnDefs="columnDefs"/>
-  </div>
-</template>
-<script lang="ts">
-import TableBase from '@widget/components/Table/index.vue'
-import {garageAPI} from '@/API/garage'
-export default{
-  components:{
-    TableBase
-  },
-  async created(){
-    let res = await garageAPI.getAllGarage({
-      pageSize:100, pageNumber:1
-    })
-    console.log(res)
-  },
-  data(){
-    return{
-      rawData:[
+
+// import NavMenu from "../../../shared-dependence/widget/Navmenu.vue";
+import { Story } from "@storybook/vue3";
+import Table from "../../widget/components/Table/index.vue"
+import { action } from '@storybook/addon-actions'
+
+export default {
+    title: 'common/table',
+    component: Table,
+};
+const Template:Story = (args) => ({
+    // Components used in your story `template` are defined in the `components` object
+    components: { Table },
+    methods: { 'click': action('click') },
+    // The story's `args` need to be mapped into the template through the `setup()` method
+    setup() {
+        // Story args can be spread into the returned object
+        return { args };
+    },
+    // Then, the spread values can be accessed directly in the template
+    template: `<Table v-bind="args" @click="click"/>`,
+
+});
+
+export const TitleHeadTable = Template.bind({});
+TitleHeadTable.args = {
+    tableName:"Title head table",
+    tableType:"",
+    rawData:[
   {
     id: 1,
     age: 82,
@@ -585,7 +593,5 @@ columnDefs:[
           field: 'email',
         },
 ]
-    }
-  }
+
 }
-</script>

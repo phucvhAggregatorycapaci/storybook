@@ -1,5 +1,5 @@
 module.exports = {
-    //... rest
+    mode: 'development',
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },

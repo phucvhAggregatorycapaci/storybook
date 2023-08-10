@@ -107,7 +107,8 @@
 <script lang="ts">
 import { useRouter } from "vue-router";
 import Icon from "../Icon/index.vue";
-export default {
+import { defineComponent } from "vue";
+export default defineComponent({
   components: {
     Icon,
   },
@@ -208,7 +209,7 @@ export default {
   // update if route chnage then activesubmenu null
 
   updated() {},
-};
+});
 </script>
 <style lang="scss">
 .submenu_enter-active,

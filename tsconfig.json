@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    
     "allowJs": true,
     "target": "esnext",
     "module": "esnext",
@@ -49,4 +50,5 @@
         "single"
       ]
     ],
+    "allowImportingTsExtensions":true,
 }

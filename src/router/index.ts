@@ -20,7 +20,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "home",
         name: "home",
-        component: () => import("../views/HomeView.vue"),
+        component: () => import("../views/garage/ListGarage.vue"),
         meta: {
           hide: true,
         },
@@ -43,6 +43,9 @@ const router = createRouter({
   routes,
 });
 router.beforeEach(async (to, from) => {
+  if (to.path =='/'){
+    return '/app'
+  }
   const canAccess = await auth(to)
   if (!canAccess) return '/login'
 })

@@ -68,8 +68,9 @@
 </template>
 <script lang="ts">
 import Card from "@widget/components/Card/index.vue";
+import { defineComponent } from "vue";
 // import { basiTableData } from "../../../constant/basic-tablle-data";
-export default {
+export default defineComponent({
     components: {
         Card,
     },
@@ -99,13 +100,13 @@ export default {
         };
     },
     computed: {
-        newtable: function () {
-            return this.basiTableData.filter(function (item) {
+        newtable() {
+            return this.basiTableData.filter(function (item:any) {
                 return Boolean(item.id < 8);
-            });
+            }) as any[];
         },
     },
-};
+});
 </script>
 <style lang="scss">
 .vgt-inner-wrap {
