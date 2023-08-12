@@ -246,6 +246,7 @@ export default defineComponent({
         };
     },
     created() {
+        console.log(this)
         this.types = this.type;
     },
     methods: {

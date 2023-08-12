@@ -12,7 +12,7 @@
     </div>
 </template>
 <script>
-import Select from "@widget/components/Select";
+import Select from "@widget/components/Select/index.vue";
 export default {
     components: {
         Select,

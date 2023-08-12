@@ -32,7 +32,7 @@
 <script>
 import Textinput from "@widget/components/Textinput";
 import Textarea from "@widget/components/Textarea";
-import Select from "@widget/components/Select";
+import Select from "@widget/components/Select/index.vue";
 export default {
     components: {
         Textinput,

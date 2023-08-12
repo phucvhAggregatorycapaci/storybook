@@ -39,6 +39,7 @@
                     of {{ perPage }} entries</span
                 >
             </div>
+            
         </div>
         <ul class="pagination" :class="paginationClass">
             <li
@@ -117,21 +118,44 @@
                     >
                 </button>
             </li>
+            <div class="flex items-center" v-if="enableChangePageSize">
+                <Select
+                    v-model.number="pageSize"
+                    @change="changePageSize(pageSize)"
+                    classInput=" w-[60px] h-9 "
+                    :options="pageSizeOptions"
+                ></Select>
+            </div>
         </ul>
     </div>
 </template>
 
 <script>
 import Icon from "@widget/components/Icon/index.vue";
-import Select from "@widget/components/Select";
+import Select from "@widget/components/Select/index.vue";
 import { defineComponent } from "vue";
 export default defineComponent({
+    created(){
+        this.pageSize= this.pageSizeOptions[0].value
+        this.currentPage = this.current
+        // if(this.enableChangePageSize && this.pageSizeOptions.length>0){
+
+        // }
+    },
     name: "Pagination",
     components: {
         Icon,
         Select,
     },
     props: {
+        pageSizeOptions:{
+            type: Array,
+            default: () => [{}],
+        },
+        enableChangePageSize:{
+            type: Boolean,
+            default:false
+        },
         options: {
             type: Array,
             default: () => [{}],
@@ -197,8 +221,10 @@ export default defineComponent({
     },
     data() {
         return {
+            currentPage:0,
             input: "",
             input2: null,
+            pageSize:null
         };
     },
     methods: {
@@ -216,11 +242,23 @@ export default defineComponent({
         },
         changePage: function (page) {
             if (page > 0 && page <= this.totalPages) {
-                this.$emit("page-changed", page);
+                this.currentPage = page
+                let value = {
+                    page:page,
+                    pageSize:this.pageSize
+                }
+                this.$emit("page-changed", value);
             }
             if (this.pageChanged) {
                 this.pageChanged({ currentPage: page });
             }
+        },
+        changePageSize: function (page) {
+                let value = {
+                    page:this.current,
+                    pageSize:this.pageSize
+                }
+                this.$emit("page-changed", value);
         },
         customPerPageChange(page) {
             this.perPageChanged({ currentPerPage: page });

@@ -2,7 +2,7 @@ import IndexedDB from '@/plugins/utilModules/indexedDB.js';
 
 async function getLoginInfoFromIndexedDB() {
     return new Promise((resolve, reject) => {
-        let indexedDB = new IndexedDB('SYMPER-LOGIN-INFOR');
+        let indexedDB = new IndexedDB('LOGIN-INFOR');
         indexedDB.open('loginInfo', false, false, async () => {
             try {
                 let s = Date.now();
@@ -12,7 +12,6 @@ async function getLoginInfoFromIndexedDB() {
                 }
                 resolve(loginedInfo);
             } catch (error) {
-                console.error('[SYMPER] Can not read from indexedDB', error);
                 reject(error);
             }
         });
@@ -20,13 +19,12 @@ async function getLoginInfoFromIndexedDB() {
 }
 
 function removeLoginedInfoInIndexedDB() {
-    let indexedDB = new IndexedDB('SYMPER-LOGIN-INFOR');
+    let indexedDB = new IndexedDB('LOGIN-INFOR');
     indexedDB.open('loginInfo', false, false, async () => {
         try {
             indexedDB.remove('loginInfo');
         } catch (error) {
             console.error(
-                '[SYMPER] Can not remove LoginedInfoInIndexedDB',
                 error
             );
         }
@@ -60,10 +58,10 @@ export const authUtil = {
          * }
          */
         return new Promise((resolve, reject) => {
-            localStorage.setItem('symper-login-info', JSON.stringify(data));
+            localStorage.setItem('login-info', JSON.stringify(data));
             data.clientId = getClientId();
 
-            let indexedDB = new IndexedDB('SYMPER-LOGIN-INFOR');
+            let indexedDB = new IndexedDB('LOGIN-INFOR');
             indexedDB.open('loginInfo', false, false, async () => {
                 try {
                     await indexedDB.save(data, 'loginInfo');
@@ -77,7 +75,7 @@ export const authUtil = {
 
     getToken() {
         if (self.window) {
-            let loginInfo = localStorage.getItem('symper-login-info');
+            let loginInfo = localStorage.getItem('login-info');
             if (loginInfo) {
                 return JSON.parse(loginInfo).token;
             } else {
@@ -105,11 +103,11 @@ export const authUtil = {
     async logout() {
         let loginedInfo = await getLoginInfoFromIndexedDB();
         removeLoginedInfoInIndexedDB();
-        localStorage.removeItem('symper-login-info');
+        localStorage.removeItem('login-info');
     },
 
     getSavedUserInfo() {
-        let loginInfo = localStorage.getItem('symper-login-info');
+        let loginInfo = localStorage.getItem('login-info');
         if (loginInfo) {
             return JSON.parse(loginInfo);
         } else {

@@ -1,5 +1,5 @@
 <template>
-  <main class="app-wrapper">
+  <main class="app-wrapper" style="height:100vh">
     <SideBar :items="appConfig.sideBarItem"
       v-if="
         $store.state.themeSettings.menuLayout === 'vertical' &&
@@ -7,14 +7,17 @@
       "
     />
   <div
+  style="height: 100%;"
       class="content-wrapper transition-all duration-150"
       :class="window.innerWidth > 1280 ? switchHeaderClass() : ''"
     >
       <div
+      style="height: 100%;"
         class="page-content"
         :class="$route.meta.appheight ? 'h-full' : 'page-min-height'"
       >
         <div
+        style="height: 100%;"
           :class="` transition-all duration-150 ${
             $store.state.themeSettings.cWidth === 'boxed'
               ? 'container mx-auto'
@@ -22,7 +25,7 @@
           }`"
         >
           <Breadcrumbs v-if="!$route.meta.hide" />
-          <router-view v-slot="{ Component }">
+          <router-view v-slot="{ Component }" style="height: 100%;">
             <transition name="router-animation" mode="out-in" appear>
               <component :is="Component"></component>
             </transition>
@@ -39,8 +42,13 @@
 import AppConfig from './appConfig'
 import SideBar from '@widget/components/Sidebar/index.vue'
 import { defineComponent } from 'vue';
+import i18n  from '@/lang/i18n'
 export default defineComponent({
   created(){
+    console.log(i18n.global.t("world"))
+    console.log(this.$t("world"))
+    // console.log(test)
+    // console.log(i18n.t('hello'))
     if (localStorage.theme === "dark") {
     document.body.classList.add("dark");
     this.$store.state.themeSettings.theme = "dark";

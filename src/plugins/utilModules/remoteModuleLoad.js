@@ -2,7 +2,6 @@ import { appConfigs } from "@/configs";
 var remoteModules = appConfigs.remoteModules;
 var loadedModules = {};
 var inProgressLoading = {};
-var symperPrefix = 'SYMPER_PREFIX_';
 
 async function getDataInModule(exposeedData, module) {
     let getFuc = await exposeedData.get(module)

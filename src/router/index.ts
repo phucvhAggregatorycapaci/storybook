@@ -24,6 +24,31 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           hide: true,
         },
+        
+      },
+      {
+        path: "garage/:id?",
+        name: "garageById",
+        component: () => import("../views/garage/GarageById.vue"),
+        meta: {
+          hide: true,
+        },
+      },
+      {
+        path: "garage/create",
+        name: "createGarage",
+        component: () => import("../views/garage/CreateGarage.vue"),
+        meta: {
+          hide: true,
+        },
+      },
+      {
+        path: "garage/edit/:id?",
+        name: "createGarage",
+        component: () => import("../views/garage/EditGarageInfo.vue"),
+        meta: {
+          hide: true,
+        },
       },
     ]
   },

@@ -3,26 +3,19 @@ import { util } from '@/plugins/util.js';
 
 // import { ajax } from './ajax.js';
 
-function makeCacheHeader(headers, url, data, options) {
-    return headers;
-}
 var tokenExpire = false;
 
 export const getDefaultHeaders = async function () {
-    let loginInfo = await util.auth.getLoginInfo();
-    let token = !loginInfo ? '' : loginInfo.token;
-    let clientId = loginInfo ? loginInfo.clientId : null;
-    if (!clientId && self.window) {
-        clientId = getClientId();
-    }
-    if (token instanceof Promise) {
-        token = await token;
-    }
+    // let loginInfo = await util.auth.getLoginInfo();
+    // let token = !loginInfo ? '' : loginInfo.token;
+    // let clientId = loginInfo ? loginInfo.clientId : null;
+    // if (token instanceof Promise) {
+    //     token = await token;
+    // }
     return {
-        'Access-Control-Allow-Origin': 'Origin',
-        'Access-Control-Allow-Credentials': true,
-        ClientId: clientId,
-        'Secure-Fgp': !loginInfo ? '' : loginInfo.profile.userContext,
+        // 'Access-Control-Allow-Origin': 'Origin',
+        // 'Access-Control-Allow-Credentials': true,
+        // "Content-Type": "application/json"
         // Authorization: `Bearer ${token}`
     };
 };
@@ -132,11 +125,12 @@ export default class Api {
         let defaultHeaders = await getDefaultHeaders();
         headers = Object.assign(defaultHeaders, headers);
 
-        if (
-            (method == 'GET' || (method == 'POST' && options.cacheResponse))
-        ) {
-            headers = makeCacheHeader(headers, url, data, options);
-        }
+        // if (
+        //     (method == 'GET' || (method == 'POST' && options.cacheResponse))
+        // ) {
+        //     headers = makeCacheHeader(headers, url, data, options);
+        // }
+        console.log(headers)
 
         // tạm bỏ session thừa nếu gọi trực tiếp xuống service mà không thông qua api gateway
         // headers.Authorization = headers.Authorization.replace(/\.([a-zA-Z0-9_-]+)::/,'.');
@@ -145,7 +139,7 @@ export default class Api {
             data: data,
             url: url,
             dataType: 'json',
-            crossDomain: true,
+            // crossDomain: true,
             headers: headers
         };
         options = Object.assign(defaultOptions, options);
@@ -156,15 +150,10 @@ export default class Api {
         try {
             if (self.window) {
                 res = await $.ajax(options);
+                console.log(res)
             } else {
-                // res = await symperAjax(options);
             }
         } catch (error) {
-            // if (typeof SYMPER_APP == 'undefined' && error.status == 401) {
-            //     console.error('401 API : ', options, error);
-            //     SYMPER_APP.$evtBus.$emit('account-token-expire');
-            // }
-            // console.error(error);
             throw error;
         }
         return res;

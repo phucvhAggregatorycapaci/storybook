@@ -41,7 +41,7 @@
 import Textinput from "@widget/components/Textinput";
 import Checkbox from "@widget/components/Checkbox";
 import Button from "@widget/components/Button/index.vue";
-import Select from "@widget/components/Select";
+import Select from "@widget/components/Select/index.vue";
 
 export default {
     components: {

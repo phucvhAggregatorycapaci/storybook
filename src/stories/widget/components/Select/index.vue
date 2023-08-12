@@ -27,7 +27,7 @@
         :size="size"
         :multiple="multiple"
       >
-        <option value="" disabled selected>{{ placeholder }}</option>
+        <!-- <option value="" disabled selected>{{ placeholder }}</option> -->
         <template v-if="!$slots.default && options">
           <option
             v-for="(item, index) in options"

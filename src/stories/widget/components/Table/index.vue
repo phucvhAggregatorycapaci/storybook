@@ -1,18 +1,21 @@
 <template>
-    <div>
+    <div >
         <header class="px-4 pt-4 pb-3 mb-3">
                 <h5 class="card-title mb-0">{{ tableName }}</h5>
             </header>
+        <div>
         <vue-good-table
+            class="vue-good-table-base"
+            :max-height="height"
             :columns="columnDefs"
             :rows="rawData"
-            :styleClass="`vgt-table ${{ tableType }}`"
             :sort-options="{
                 enabled:sortEnabled
             }"
         >
 
         </vue-good-table>
+        </div>
     </div>
 </template>
 <script lang="ts">
@@ -22,6 +25,9 @@ export type tableColumnDefs={
 }
     export default{
         props:{
+            height:{
+                default: "auto" as string
+            },
             tableName:{
                 default:"Table " as string
             },
@@ -44,7 +50,11 @@ export type tableColumnDefs={
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
+    .vue-good-table-base thead{
+        position:sticky;
+        top:0px
+    }
 .vgt-inner-wrap {
     @apply shadow-none;
 }
